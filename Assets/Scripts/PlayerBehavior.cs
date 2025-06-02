@@ -49,12 +49,14 @@ public class PlayerBehavior : MonoBehaviour
     /// </summary>
     private float currentScale = 1;
 
+    private MobileJoyStick joystick;
 
     void Start()
     {
         // Get access to our Rigidbody component
         rb = GetComponent<Rigidbody>();
         minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
+        joystick = GameObject.FindObjectOfType<MobileJoyStick>();
     }
 
     /// <summary>
@@ -118,14 +120,22 @@ public class PlayerBehavior : MonoBehaviour
 
         //Check if we're moving
         var horizontalSpeed = Input.GetAxis("Horizontal") * dodgeSpeed;
+        //if joystick is active and moving, override value
+        if(joystick && joystick.axisValue.x != 0)
+        {
+            horizontalSpeed = joystick.axisValue.x * dodgeSpeed;
+        }
 
         //Check if running inUnity editor or stand alone build
 #if UNITY_STANDALONE || UNITY_WEBPLAYER || UNITY_EDITOR
         //if mouse is held down/screen tap
         if (Input.GetMouseButton(0))
         {
-            var screenPos = Input.mousePosition;
-            horizontalSpeed = CalculateMovement(screenPos);
+            if (!joystick)
+            {
+                var screenPos = Input.mousePosition;
+                horizontalSpeed = CalculateMovement(screenPos);
+            }
         }
         //check if running on mobile
 #elif UNITY_IOS || UNITY_ANDROID
@@ -137,7 +147,7 @@ public class PlayerBehavior : MonoBehaviour
                 break;
             case MobileHorizMovement.ScreenTouch:
                 //check for more than zero touches
-                if (Input.touchCount > 0)
+                if (!joystick && Input.touchCount > 0)
                 {
                     //store first touch
                     var firstTouch = Input.touches[0];
