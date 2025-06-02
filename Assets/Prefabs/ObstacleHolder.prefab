@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9151720942293356666}
+  - component: {fileID: 3798907668400769895}
+  - component: {fileID: 6506302122363081755}
   m_Layer: 0
   m_Name: ObstacleHolder
   m_TagString: Untagged
@@ -32,6 +34,41 @@ Transform:
   - {fileID: 7849535439686858686}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3798907668400769895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745239049150228100}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6506302122363081755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7745239049150228100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1298f63f421f7e84ca5e301296fd2658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 2
+  explosion: {fileID: 3239489193119484926, guid: 34adb8a0d26905846b65681ac1da72ff, type: 3}
 --- !u!1001 &893682867280940140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54,23 +91,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.09229599
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.09229599
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -78,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 6956329908096072658, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -88,7 +125,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveObstacle
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2238688630479846103, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
+    - {fileID: 2203231077749608366, guid: 590e6a82667c2a84f9a36c7df199ea70, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

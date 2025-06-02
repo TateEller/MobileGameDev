@@ -62,6 +62,20 @@ public class PlayerBehavior : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        //using keyboard/controller to toggle pause menu
+        if (Input.GetButtonDown("Cancel"))
+        {
+            var pauseBehavior = GameObject.FindObjectOfType<PauseScreenBehavior>();
+            //toggle the values
+            pauseBehavior.SetPauseMenu(!PauseScreenBehavior.paused);
+        }
+        //if game is paused dont do anything
+        if (PauseScreenBehavior.paused)
+        {
+            Debug.Log("*Skip PlayerBehavior Update*");
+            return;
+        }
+
         /* Check if we are running either in the Unity
            editor or in a
          * standalone build.*/
@@ -95,6 +109,13 @@ public class PlayerBehavior : MonoBehaviour
     /// </summary>
     void FixedUpdate()
     {
+        //if game is paused dont do anything
+        if (PauseScreenBehavior.paused)
+        {
+            Debug.Log("*Skip PlayerBehavior Fixed*");
+            return;
+        }
+
         //Check if we're moving
         var horizontalSpeed = Input.GetAxis("Horizontal") * dodgeSpeed;
 
