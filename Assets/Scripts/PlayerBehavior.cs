@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBehavior : MonoBehaviour
@@ -51,12 +52,36 @@ public class PlayerBehavior : MonoBehaviour
 
     private MobileJoyStick joystick;
 
+    [Header("Object References")]
+    public TextMeshProUGUI scoreText;
+    private float score = 0;
+    public float Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            if (scoreText == null)
+            {
+                Debug.LogError("Score Text is not set. Please go to the inspector and assign it");
+                return;
+            }
+            scoreText.text = string.Format("{0:0}", score);
+
+            if (PlayerPrefs.GetInt("score") <= score)
+            {
+                PlayerPrefs.SetInt("score", (int)score);
+            }
+        }
+    }
+
     void Start()
     {
         // Get access to our Rigidbody component
         rb = GetComponent<Rigidbody>();
         minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
         joystick = GameObject.FindObjectOfType<MobileJoyStick>();
+        Score = 0;
     }
 
     /// <summary>
@@ -74,7 +99,6 @@ public class PlayerBehavior : MonoBehaviour
         //if game is paused dont do anything
         if (PauseScreenBehavior.paused)
         {
-            Debug.Log("*Skip PlayerBehavior Update*");
             return;
         }
 
@@ -114,9 +138,9 @@ public class PlayerBehavior : MonoBehaviour
         //if game is paused dont do anything
         if (PauseScreenBehavior.paused)
         {
-            Debug.Log("*Skip PlayerBehavior Fixed*");
             return;
         }
+        Score += Time.deltaTime;
 
         //Check if we're moving
         var horizontalSpeed = Input.GetAxis("Horizontal") * dodgeSpeed;
